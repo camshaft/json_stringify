@@ -1,5 +1,9 @@
 -module(json_stringify).
 
+-compile([native, {hipe, [o3]}]).
+-compile(inline).
+-compile(inline_list_funcs).
+
 -export([from_term/1]).
 
 from_term(false) ->
