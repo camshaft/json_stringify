@@ -1,0 +1,11 @@
+{application, json_stringify, [
+  {description, "simple json stringify for erlang"},
+  {vsn, "0.1.0"},
+  {modules, []},
+  {registered, []},
+  {applications, [
+    kernel,
+    stdlib
+  ]},
+  {env, []}
+]}.
