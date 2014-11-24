@@ -24,13 +24,22 @@ from_term(Map) when is_map(Map) ->
   Values = maps:fold(fun obj_fold/3, [], Map),
   [<<"{">>, join(Values, <<",">>, []), <<"}">>];
 from_term([{_K, _V}|_] = Obj) ->
-  Values = lists:foldl(fun obj_fold/3, [], Obj),
+  Values = lists:foldl(fun proplist_fold/2, [], Obj),
   [<<"{">>, join(Values, <<",">>, []), <<"}">>];
 from_term(List) when is_list(List) ->
   Values = [from_term(Value) || Value <- List],
   [<<"[">>, join(Values, <<",">>, []), <<"]">>].
 
+proplist_fold({undefined, _}, Acc) ->
+  Acc;
+proplist_fold({_, undefined}, Acc) ->
+  Acc;
+proplist_fold({K, V}, Acc) ->
+  [[from_term(K), $:, from_term(V)]|Acc].
+
 obj_fold(_, undefined, Acc) ->
+  Acc;
+obj_fold(undefined, _, Acc) ->
   Acc;
 obj_fold(K, V, Acc) ->
   [[from_term(K), $:, from_term(V)]|Acc].
