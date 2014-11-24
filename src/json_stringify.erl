@@ -55,15 +55,15 @@ escape(Bin) ->
   << <<(escape_char(Char))/binary>> || <<Char/utf8>> <= Bin >>.
 
 escape_char($\b) ->
-  <<"\\\b">>;
+  <<"\\b">>;
 escape_char($\t) ->
-  <<"\\\bt">>;
+  <<"\\t">>;
 escape_char($\n) ->
-  <<"\\\n">>;
+  <<"\\n">>;
 escape_char($\f) ->
-  <<"\\\f">>;
+  <<"\\f">>;
 escape_char($\r) ->
-  <<"\\\r">>;
+  <<"\\r">>;
 escape_char($\\) ->
   <<"\\\\">>;
 escape_char($") ->
