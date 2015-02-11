@@ -12,6 +12,8 @@ from_term(true) ->
   <<"true">>;
 from_term(null) ->
   <<"null">>;
+from_term(nil) ->
+  <<"null">>;
 from_term(Atom) when is_atom(Atom) ->
   [<<"\"">>, atom_to_binary(Atom, utf8), <<"\"">>];
 from_term(Binary) when is_binary(Binary) ->
